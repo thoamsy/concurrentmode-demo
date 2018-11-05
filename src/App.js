@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import bulma from 'bulma';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <dialog id="favDialog" open>
+          <form method="dialog" aria-hidden>
+            <p>
+              <label>
+                Favorite animal:
+                <select>
+                  <option />
+                  <option>Brine shrimp</option>
+                  <option>Red panda</option>
+                  <option>Spider monkey</option>
+                </select>
+              </label>
+            </p>
+            <menu>
+              <button>Cancel</button>
+              <button>Confirm</button>
+            </menu>
+          </form>
+        </dialog>
+
+        <menu>
+          <button id="updateDetails">Update details</button>
+        </menu>
       </div>
     );
   }
