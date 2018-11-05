@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom';
-import 'bulma';
+import 'bulma/css/bulma.min.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 

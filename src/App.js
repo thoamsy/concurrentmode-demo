@@ -1,34 +1,18 @@
 import React, { Component } from 'react';
-import bulma from 'bulma';
+import Container from './Container';
+import Tab from './Tab';
 
+const { Panel } = Tab;
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <dialog id="favDialog" open>
-          <form method="dialog" aria-hidden>
-            <p>
-              <label>
-                Favorite animal:
-                <select>
-                  <option />
-                  <option>Brine shrimp</option>
-                  <option>Red panda</option>
-                  <option>Spider monkey</option>
-                </select>
-              </label>
-            </p>
-            <menu>
-              <button>Cancel</button>
-              <button>Confirm</button>
-            </menu>
-          </form>
-        </dialog>
-
-        <menu>
-          <button id="updateDetails">Update details</button>
-        </menu>
-      </div>
+      <Container>
+        <Tab>
+          <Panel labelName="Tab 1">234</Panel>
+          <Panel labelName="Tab 2">13</Panel>
+          <Panel labelName="Tab 3">13</Panel>
+        </Tab>
+      </Container>
     );
   }
 }
