@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 
 const Panel = ({ labelName, children, onClick, isActive }) => (
   <li className={isActive ? 'is-active' : ''}>
@@ -8,34 +8,33 @@ const Panel = ({ labelName, children, onClick, isActive }) => (
   </li>
 );
 
-class Tab extends Component {
-  static Panel = Panel;
-  state = {
-    current: 0,
+const Tab = props => {
+  const [current, setCurrent] = useState(props.active || 0);
+
+  const onClickTabPanel = i => () => {
+    setCurrent(i);
   };
 
-  onClickTabPanel = i => () => {
-    console.log(i);
-    this.setState({
-      current: i,
-    });
-  };
-
-  render() {
-    const { children } = this.props;
-    return (
+  const children = React.Children.toArray(props.children);
+  console.log(children[current]);
+  return (
+    <>
       <div className="tabs">
         <ul>
-          {React.Children.map(children, (tab, i) =>
+          {children.map((tab, i) =>
             React.cloneElement(tab, {
-              onClick: this.onClickTabPanel(i),
-              isActive: this.state.current === i,
+              onClick: onClickTabPanel(i),
+              isActive: current === i,
+              key: i, // 这里用 i 问题不大
             })
           )}
         </ul>
       </div>
-    );
-  }
-}
+      <section className="content">{children[current].props.children}</section>
+    </>
+  );
+};
+
+Tab.Panel = Panel;
 
 export default Tab;

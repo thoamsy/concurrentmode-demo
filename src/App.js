@@ -9,8 +9,8 @@ class App extends Component {
       <Container>
         <Tab>
           <Panel labelName="Tab 1">234</Panel>
-          <Panel labelName="Tab 2">13</Panel>
-          <Panel labelName="Tab 3">13</Panel>
+          <Panel labelName="Tab 2">good for me</Panel>
+          <Panel labelName="Tab 3">hhh</Panel>
         </Tab>
       </Container>
     );
