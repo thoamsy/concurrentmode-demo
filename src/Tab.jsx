@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState } from 'react';
 
 const Panel = ({ labelName, children, onClick, isActive }) => (
   <li className={isActive ? 'is-active' : ''}>
@@ -16,7 +16,6 @@ const Tab = props => {
   };
 
   const children = React.Children.toArray(props.children);
-  console.log(children[current]);
   return (
     <>
       <div className="tabs">
@@ -30,7 +29,24 @@ const Tab = props => {
           )}
         </ul>
       </div>
-      <section className="content">{children[current].props.children}</section>
+      <div style={{ position: 'relative' }}>
+        {children.map((tab, i) => (
+          <section
+            key={i}
+            className="content"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              opacity: +(current === i),
+            }}
+            hidden={current !== i ? true : null}
+          >
+            {children[i].props.children}
+          </section>
+        ))}
+      </div>
     </>
   );
 };
