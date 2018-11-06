@@ -1,33 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 
-function lazyLoad(LazyComponent) {
-  return class extends Component {
-    static displayName = `Lazy(${Component.displayName})`;
-    state = {
-      hasLoaded: false,
-      C: null,
-    };
+function lazyLoad(path) {
+  function LazyComponent(props) {
+    const [lazy, setLazy] = useState({ hasLoaded: false, C: null });
 
-    componentDidMount() {
+    useEffect(() => {
       if (lazyLoad.C) {
-        return this.setState({ hasLoaded: true, C: lazyLoad.C });
+        return setLazy({ hasLoaded: true, C: lazyLoad.C });
       }
-      LazyComponent().then(module => {
+      path().then(module => {
         const { default: C } = module;
         lazyLoad.C = C;
-        this.setState({
-          hasLoaded: true,
-          C,
-        });
+        setLazy({ hasLoaded: true, C: lazyLoad.C });
       });
-    }
+    }, []);
+    const { C, hasLoaded } = lazy;
+    if (!hasLoaded) return '🌀';
+    return <C {...props} />;
+  }
 
-    render() {
-      const { C, hasLoaded } = this.state;
-      if (!hasLoaded) return '🌀';
-      return <C {...this.props} />;
-    }
-  };
+  LazyComponent.displayName = `Lazy(${Component.displayName})`;
+  return LazyComponent;
 }
 
 lazyLoad.C = null;
