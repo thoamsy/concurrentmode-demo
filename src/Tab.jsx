@@ -15,6 +15,7 @@ const Tab = props => {
 
   useEffect(
     () => {
+      // NOTE: 使用 JS 数组的空巢特性，这些元素会被 map 方法跳过
       const tabs = loadedTab.slice();
       tabs[current] = children[current];
       setTab(tabs);
@@ -30,8 +31,8 @@ const Tab = props => {
     <>
       <div className="tabs">
         <ul>
-          {children.map((tab, i) =>
-            React.cloneElement(tab, {
+          {children.map((panel, i) =>
+            React.cloneElement(panel, {
               onClick: onClickTabPanel(i),
               isActive: current === i,
               key: i, // 这里用 i 问题不大
