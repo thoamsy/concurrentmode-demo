@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Container from './Container';
 import Tab from './Tab';
+import lazyLoad from './lazyLoad';
 
 import Text from './panel/Text';
-import Review from './panel/Review';
+// import Review from './panel/Review';
+const Review = lazyLoad(() => import('./panel/Review'));
 
 const { Panel } = Tab;
 class App extends Component {
