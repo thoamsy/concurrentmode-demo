@@ -16,6 +16,10 @@ export default class Review extends Component {
     });
   }
 
+  componentDidUpdate() {
+    console.log('I am in.');
+  }
+
   render() {
     const { loading } = this.state;
     if (loading === null) return null;
