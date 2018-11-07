@@ -30,22 +30,20 @@ const Form = () => {
   );
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        <div className="field">
-          <div className={`control`}>
-            <input
-              onChange={onChange}
-              value={value}
-              className="input"
-              type="text"
-              placeholder="Normal loading input"
-            />
-          </div>
+    <form onSubmit={onSubmit}>
+      <div className="field">
+        <div className={`control`}>
+          <input
+            onChange={onChange}
+            value={value}
+            className="input"
+            type="text"
+            placeholder="Normal loading input"
+          />
         </div>
-        <Context>{search}</Context>
-      </form>
-    </>
+      </div>
+      <Context>{search}</Context>
+    </form>
   );
 };
 export default Form;
