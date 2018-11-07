@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import Container from './Container';
 import Tab from './Tab';
 import lazyLoad from './lazyLoad';
@@ -19,7 +19,9 @@ class App extends Component {
             <Text />
           </Panel>
           <Panel labelName="Tab 2">
-            <Form />
+            <Suspense fallback="Loading…">
+              <Form />
+            </Suspense>
           </Panel>
           <Panel labelName="Tab 3">
             <Review />

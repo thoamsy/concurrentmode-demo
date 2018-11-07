@@ -1,52 +1,51 @@
-import React, { Component } from 'react';
+import React, { useState, useCallback } from 'react';
+import { unstable_createResource as createResource } from 'react-cache';
 
-const fakeAPI = value =>
-  new Promise(r => {
-    setTimeout(() => r(value), 1500);
-  });
+const fakeAPI = createResource(
+  value =>
+    new Promise(r => {
+      setTimeout(() => r(value), 1500);
+    })
+);
 
-export default class Form extends Component {
-  state = {
-    context: '',
-    loading: false,
-  };
+const Context = ({ children }) => {
+  const res = fakeAPI.read(children);
+  return <p>{res}</p>;
+};
 
-  ref = React.createRef();
+const Form = () => {
+  const [value, setValue] = useState('');
+  const [search, setSearch] = useState('');
 
-  submit = event => {
-    event.preventDefault();
-    this.setState({ loading: true });
-    fakeAPI(this.ref.current.value)
-      .then(context => {
-        this.setState({
-          context,
-        });
-        this.setState({ loading: false });
-      })
-      .catch(() => {
-        this.setState({ loading: false });
-      });
-  };
+  const onChange = useCallback(({ target }) => {
+    setValue(target.value);
+  }, []);
 
-  render() {
-    return (
-      <>
-        <form onSubmit={this.submit}>
-          <div className="field">
-            <div
-              className={`control ${this.state.loading ? 'is-loading' : ''}`}
-            >
-              <input
-                ref={this.ref}
-                className="input"
-                type="text"
-                placeholder="Normal loading input"
-              />
-            </div>
+  const onSubmit = useCallback(
+    event => {
+      event.preventDefault();
+      setSearch(value);
+    },
+    [value]
+  );
+
+  return (
+    <>
+      <form onSubmit={onSubmit}>
+        <div className="field">
+          <div className={`control`}>
+            <input
+              onChange={onChange}
+              value={value}
+              className="input"
+              type="text"
+              placeholder="Normal loading input"
+            />
           </div>
-          <p>{this.state.context}</p>
-        </form>
-      </>
-    );
-  }
-}
+        </div>
+        <Context>{search}</Context>
+      </form>
+    </>
+  );
+};
+export default Form;
