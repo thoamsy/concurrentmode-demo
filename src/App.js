@@ -11,7 +11,10 @@ const { Panel } = Tab;
 class App extends Component {
   render() {
     return (
-      <Container>
+      <>
+        <h1 className="title">
+          {this.props.mode === 1 ? 'Current' : 'Sync'} Mode
+        </h1>
         <Tab>
           <Panel labelName="Tab 1">
             <Text />
@@ -25,7 +28,7 @@ class App extends Component {
             <Review />
           </Panel>
         </Tab>
-      </Container>
+      </>
     );
   }
 }
