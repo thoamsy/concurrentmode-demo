@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { unstable_createResource as createResource } from 'react-cache';
 
 const fakeAPI = createResource(
@@ -11,10 +11,13 @@ const fakeAPI = createResource(
 const Form = () => {
   const [value, setValue] = useState('');
   const [search, setSearch] = useState('You know Nothing');
+  const inputRef = useRef();
+
+  useEffect(() => inputRef.current.focus());
 
   const onChange = useCallback(({ target }) => {
     setValue(target.value);
-  }, []);
+  });
 
   const onSubmit = useCallback(event => {
     event.preventDefault();
@@ -28,6 +31,7 @@ const Form = () => {
       <div className="field">
         <div className={`control`}>
           <input
+            ref={inputRef}
             onChange={onChange}
             value={value}
             className="input"
