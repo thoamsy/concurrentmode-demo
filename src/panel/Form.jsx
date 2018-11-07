@@ -8,15 +8,21 @@ const fakeAPI = value =>
 export default class Form extends Component {
   state = {
     context: '',
+    value: '',
     loading: false,
   };
 
-  ref = React.createRef();
+  componentDidMount() {
+    this.fetchUseless();
+  }
 
-  submit = event => {
-    event.preventDefault();
+  onChange = ({ target }) => {
+    this.setState({ value: target.value });
+  };
+
+  fetchUseless() {
     this.setState({ loading: true });
-    fakeAPI(this.ref.current.value)
+    fakeAPI(this.state.value || 'You know nothing')
       .then(context => {
         this.setState({
           context,
@@ -26,27 +32,30 @@ export default class Form extends Component {
       .catch(() => {
         this.setState({ loading: false });
       });
+  }
+
+  submit = event => {
+    event.preventDefault();
+    this.fetchUseless();
   };
 
   render() {
+    if (this.state.loading) return 'Loading…';
     return (
-      <>
-        <form onSubmit={this.submit}>
-          <div className="field">
-            <div
-              className={`control ${this.state.loading ? 'is-loading' : ''}`}
-            >
-              <input
-                ref={this.ref}
-                className="input"
-                type="text"
-                placeholder="Normal loading input"
-              />
-            </div>
+      <form onSubmit={this.submit}>
+        <div className="field">
+          <div className="control">
+            <input
+              value={this.state.value}
+              onChange={this.onChange}
+              className="input"
+              type="text"
+              placeholder="Normal loading input"
+            />
           </div>
-          <p>{this.state.context}</p>
-        </form>
-      </>
+        </div>
+        <p>{this.state.context}</p>
+      </form>
     );
   }
 }
