@@ -8,26 +8,20 @@ const fakeAPI = createResource(
     })
 );
 
-const Context = ({ children }) => {
-  const res = fakeAPI.read(children);
-  return <p>{res}</p>;
-};
-
 const Form = () => {
   const [value, setValue] = useState('');
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('You know Nothing');
 
   const onChange = useCallback(({ target }) => {
     setValue(target.value);
   }, []);
 
-  const onSubmit = useCallback(
-    event => {
-      event.preventDefault();
-      setSearch(value);
-    },
-    [value]
-  );
+  const onSubmit = useCallback(event => {
+    event.preventDefault();
+    setSearch(value);
+  });
+
+  const context = fakeAPI.read(search);
 
   return (
     <form onSubmit={onSubmit}>
@@ -42,7 +36,7 @@ const Form = () => {
           />
         </div>
       </div>
-      <Context>{search}</Context>
+      <p>{context}</p>
     </form>
   );
 };
