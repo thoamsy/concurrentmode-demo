@@ -1,11 +1,19 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+  useContext,
+} from 'react';
 import { unstable_createResource as createResource } from 'react-cache';
+import { WhichMode } from '../App';
 
 const fakeAPI = createResource(
   value =>
     new Promise(r => {
       setTimeout(() => r(value), 1500);
-    })
+    }),
+  ([a, b]) => a + b
 );
 
 const Form = () => {
@@ -14,6 +22,7 @@ const Form = () => {
   const inputRef = useRef();
 
   useEffect(() => inputRef.current.focus());
+  const mode = useContext(WhichMode);
 
   const onChange = useCallback(({ target }) => {
     setValue(target.value);
@@ -24,7 +33,7 @@ const Form = () => {
     setSearch(value);
   });
 
-  const context = fakeAPI.read(search);
+  const context = fakeAPI.read([search, mode]);
 
   return (
     <form onSubmit={onSubmit}>

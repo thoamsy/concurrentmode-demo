@@ -1,5 +1,4 @@
-import React, { Component, Suspense, lazy } from 'react';
-import Container from './Container';
+import React, { Component, Suspense, lazy, createContext } from 'react';
 import Tab from './Tab';
 
 import Text from './panel/Text';
@@ -8,10 +7,12 @@ const Form = lazy(() => import('./panel/Form'));
 
 const { Panel } = Tab;
 
+export const WhichMode = createContext(null);
+
 class App extends Component {
   render() {
     return (
-      <>
+      <WhichMode.Provider value={this.props.mode}>
         <h1 className="title">
           {this.props.mode === 1 ? 'Current' : 'Sync'} Mode
         </h1>
@@ -28,7 +29,7 @@ class App extends Component {
             <Review />
           </Panel>
         </Tab>
-      </>
+      </WhichMode.Provider>
     );
   }
 }
