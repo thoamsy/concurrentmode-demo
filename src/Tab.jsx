@@ -53,7 +53,6 @@ const Tab = props => {
                 right: 0,
                 opacity: +(current === i),
               }}
-              hidden={current !== i ? true : null}
             >
               {tab.props.children}
             </section>

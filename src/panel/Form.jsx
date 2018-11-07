@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 
 const fakeAPI = value =>
   new Promise(r => {
@@ -12,8 +12,11 @@ export default class Form extends Component {
     loading: false,
   };
 
+  inputRef = createRef();
+
   componentDidMount() {
     this.fetchUseless();
+    this.inputRef.current.focus();
   }
 
   onChange = ({ target }) => {
@@ -46,6 +49,7 @@ export default class Form extends Component {
         <div className="field">
           <div className="control">
             <input
+              ref={this.inputRef}
               value={this.state.value}
               onChange={this.onChange}
               className="input"
