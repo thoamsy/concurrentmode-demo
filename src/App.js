@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import Container from './Container';
 import Tab from './Tab';
-import lazyLoad from './lazyLoad';
 
 import Text from './panel/Text';
-// import Review from './panel/Review';
-const Review = lazyLoad(() => import('./panel/Review'));
-const Form = lazyLoad(() => import('./panel/Form'));
+const Review = lazy(() => import('./panel/Review'));
+const Form = lazy(() => import('./panel/Form'));
 
 const { Panel } = Tab;
 

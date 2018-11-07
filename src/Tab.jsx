@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 
 const Panel = ({ labelName, children, onClick, isActive }) => (
   <li className={isActive ? 'is-active' : ''}>
@@ -40,24 +40,26 @@ const Tab = props => {
           )}
         </ul>
       </div>
-      <div style={{ position: 'relative' }}>
-        {loadedTab.map((tab, i) => (
-          <section
-            key={i}
-            className="content"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              opacity: +(current === i),
-            }}
-            hidden={current !== i ? true : null}
-          >
-            {tab.props.children}
-          </section>
-        ))}
-      </div>
+      <Suspense fallback="🌀">
+        <div style={{ position: 'relative' }}>
+          {loadedTab.map((tab, i) => (
+            <section
+              key={i}
+              className="content"
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                opacity: +(current === i),
+              }}
+              hidden={current !== i ? true : null}
+            >
+              {tab.props.children}
+            </section>
+          ))}
+        </div>
+      </Suspense>
     </>
   );
 };
