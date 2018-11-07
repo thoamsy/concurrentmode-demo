@@ -11,19 +11,17 @@ const { Panel } = Tab;
 class App extends Component {
   render() {
     return (
-      <Container>
-        <Tab>
-          <Panel labelName="Tab 1">
-            <Text />
-          </Panel>
-          <Panel labelName="Tab 2">
-            <Form />
-          </Panel>
-          <Panel labelName="Tab 3">
-            <Review />
-          </Panel>
-        </Tab>
-      </Container>
+      <Tab>
+        <Panel labelName="Tab 1">
+          <Text />
+        </Panel>
+        <Panel labelName="Tab 2">
+          <Form />
+        </Panel>
+        <Panel labelName="Tab 3">
+          <Review />
+        </Panel>
+      </Tab>
     );
   }
 }
