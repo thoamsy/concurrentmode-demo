@@ -8,11 +8,10 @@ import React, {
 import { unstable_createResource as createResource } from 'react-cache';
 import { WhichMode } from '../App';
 
+import { delay } from '../delayTime';
+
 const fakeAPI = createResource(
-  value =>
-    new Promise(r => {
-      setTimeout(() => r(value), 1500);
-    }),
+  value => delay().then(() => value),
   ([a, b]) => a + b
 );
 

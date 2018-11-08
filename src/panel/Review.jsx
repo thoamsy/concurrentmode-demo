@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-
-const delay = ms => new Promise(r => setTimeout(r, ms));
+import { delay } from '../delayTime';
 
 export default class Review extends Component {
   state = {
@@ -9,7 +8,7 @@ export default class Review extends Component {
 
   componentDidMount() {
     this.setState({ loading: true });
-    delay(3000).then(() => {
+    delay().then(() => {
       this.setState({
         loading: false,
       });
