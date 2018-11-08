@@ -1,5 +1,4 @@
 import React, { Component, lazy } from 'react';
-import Container from './Container';
 import Tab from './Tab';
 
 import Text from './panel/Text';

@@ -1,9 +1,7 @@
 import React, { Component, createRef } from 'react';
+import { delay } from '../delayTime';
 
-const fakeAPI = value =>
-  new Promise(r => {
-    setTimeout(() => r(value), 1500);
-  });
+const fakeAPI = value => delay().then(() => value);
 
 export default class Form extends Component {
   state = {
