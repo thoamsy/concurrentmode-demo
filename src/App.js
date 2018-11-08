@@ -3,8 +3,9 @@ import styled, { css } from 'styled-components';
 
 import Tab from './Tab';
 import Text from './panel/Text';
-const Review = lazy(() => import('./panel/Review'));
-const Form = lazy(() => import('./panel/Form'));
+import lazyload from './lazyLoad';
+const Review = lazyload(() => import('./panel/Review'));
+const Form = lazyload(() => import('./panel/Form'));
 
 const color = css`
   & .tabs li.is-active a {
