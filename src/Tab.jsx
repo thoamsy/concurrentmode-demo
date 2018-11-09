@@ -9,7 +9,7 @@ const Panel = ({ labelName, children, onClick, isActive }) => (
 );
 
 const Tab = props => {
-  const children = React.Children.toArray(props.children);
+  const panels = React.Children.toArray(props.children);
   const [current, setCurrent] = useState(props.active || 0);
   const [loadedTab, setTab] = useState([]);
 
@@ -17,7 +17,7 @@ const Tab = props => {
     () => {
       // NOTE: 使用 JS 数组的空巢特性，这些元素会被 map 方法跳过
       const tabs = loadedTab.slice();
-      tabs[current] = children[current];
+      tabs[current] = panels[current];
       setTab(tabs);
     },
     [current]
@@ -31,7 +31,7 @@ const Tab = props => {
     <>
       <div className="tabs">
         <ul>
-          {children.map((panel, i) =>
+          {panels.map((panel, i) =>
             React.cloneElement(panel, {
               onClick: onClickTabPanel(i),
               isActive: current === i,

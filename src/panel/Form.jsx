@@ -20,7 +20,10 @@ const Form = () => {
   const [search, setSearch] = useState('You know Nothing');
   const inputRef = useRef();
 
-  useEffect(() => inputRef.current.focus());
+  useEffect(() => {
+    inputRef.current.focus();
+  });
+
   const mode = useContext(WhichMode);
 
   const onChange = useCallback(({ target }) => {
