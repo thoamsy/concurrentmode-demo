@@ -1,5 +1,3 @@
-# React Concurrent Mode
-
 # 想要陈述的观点
 
 本 demo 是根据 [Concurrent Rendering in React](https://www.youtube.com/watch?v=ByBPyMBTzM0&t=1882s&frags=pl%2Cwn) 的灵感，实现的一个简单的 Demo
