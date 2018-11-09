@@ -9,8 +9,8 @@ const Form = lazyload(() => import('./panel/Form'));
 
 const color = css`
   & .tabs li.is-active a {
-    border-bottom-color: #ff3860;
-    color: #ff3860;
+    border-bottom-color: #ffdd57;
+    color: #ffdd57;
   }
 `;
 const Container = styled.div`
