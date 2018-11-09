@@ -21,10 +21,10 @@
 
 Demo 通过一个 Tab 来展现，点击某个 Tab 就能显示该 Tab 下的组件（废话），同时每个 Tab 的组件都是 lazy load
 
-![](./React%20Concurrent%20Mode/07DFFDD7-AE97-41E7-B6EA-A10DAA0CB4DE.png)
+![](imgs/07DFFDD7-AE97-41E7-B6EA-A10DAA0CB4DE.png)
 其中第一个 Tab 看上去很简单，需要关注的特性其实就是 Network 中，被动态加载进来的 JS。
 而在代码中，而实现 Lazy Load 的部分，则有代码中的 [⇥](./src/Tab.jsx) 来实现逻辑
-![](React%20Concurrent%20Mode/B6327186-87D6-481F-B8FC-0D22B1E9F067.png)
+![](imgs/B6327186-87D6-481F-B8FC-0D22B1E9F067.png)
 
 ### React cache
 
@@ -43,7 +43,7 @@ Demo 通过一个 Tab 来展现，点击某个 Tab 就能显示该 Tab 下的组
 本 Demo 对 Concurrent Mode 的挖掘比较浅，仅仅只是支持 `Suspense` 的 `maxDuration` 属性。为什么会有这样一个需求？
 关注 Demo 的底部那一栏
 
-![](React%20Concurrent%20Mode/C3262D7F-3E5F-4EE5-AEA1-E8AC506C74B9.png)
+![](imgs/C3262D7F-3E5F-4EE5-AEA1-E8AC506C74B9.png)
 
 这里有一个切换 Loading 时间的开关，默认情况下是 Slow。上面提到的，第二个 Tab 在 didMount 的时候就会发送一个 ajax 请求。如果这个请求很快的话，比如 200ms 之内就能得到结果，那么再唐突的显示一个 loading 是没有意义的，**反而会让用户觉得你这个 app 很卡**。
 而通过 maxDuration 就能做到指定时间内，如果**资源**加载完成了，就直接展示资源，跳过 Loading 的展示。而这个功能在同步模式下**是不支持的**
