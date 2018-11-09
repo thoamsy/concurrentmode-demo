@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { switchDelay } from './delayTime';
 
 const NetWorkControl = () => {
-  const [isFast, setNetwork] = useState(true);
+  const [isFast, setNetwork] = useState(false);
 
   const onTagClick = () => {
     setNetwork(!isFast);
@@ -20,7 +20,7 @@ const NetWorkControl = () => {
 
 const ModeChoose = () => {
   const [sync, setSync] = useState(true);
-  const [async, setAsync] = useState(true);
+  const [async, setAsync] = useState(false);
 
   const toggleSync = () => {
     const syncRoot = document.querySelector('#sync-root');

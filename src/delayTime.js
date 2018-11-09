@@ -1,6 +1,6 @@
 const fast = 200;
 const slow = 2000;
-export let delayMs = fast;
+export let delayMs = slow;
 
 export const switchDelay = () => (delayMs = delayMs === fast ? slow : fast);
 export const delay = (ms = delayMs) => {
